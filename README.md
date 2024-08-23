@@ -53,4 +53,4 @@ Picture (optional): If you would like to provide a picture, you may do so.
 I have plans on porting this over to python. And no, I do not plan on porting this over to linux. I will do that later once some major updates are out because it is kinda buggy as-is.
 
 # Building
-To build, you need Visual Studio 2019 and to build, you can either load the solution or do ```dotnet build``` in the folder with the solution.
+You need Visual Studio 2019 and to build, you can either load the solution or do ```dotnet build``` in the folder with the solution.
