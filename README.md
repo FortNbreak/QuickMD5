@@ -9,7 +9,7 @@
 > Using this on a HDD may cause this tool to be very slow. It is not reccomended to use a HDD but if you need too, you can but it may be slow.
 
 # QuickMD5
-A fast, free, and open-source MD5 hash checker similar to QuickSFV but console-based.
+A fast, free, small, and open-source MD5 hash checker similar to QuickSFV but console-based.
 
 # How is it so fast
 QuickMD5 is very fast in speed because it uses multi-threading. By running multiple threads, it can read and process multiple files at the same time. This greatly reduces the time needed to check the files.
