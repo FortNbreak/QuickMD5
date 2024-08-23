@@ -7,6 +7,7 @@
 >
 > Since this can use so much of your disk and CPU, it is reccomended to have a mid to high-end setup to use this tool. It is reccomended to have at least a Quad (4) core CPU and a SSD (Solid-State Drive)
 > Using this on a HDD may cause this tool to be very slow. It is not reccomended to use a HDD but if you need too, you can but it may be slow.
+> The optimal specs would be: >6 core CPU, Internal M.2 SSD
 
 # QuickMD5
 A fast, free, small, and open-source MD5 hash checker similar to QuickSFV but console-based.
