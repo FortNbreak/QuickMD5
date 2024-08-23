@@ -1,0 +1,14 @@
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\bin\Debug\QuickMD5.exe.config
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\bin\Debug\QuickMD5.exe
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\bin\Debug\QuickMD5.pdb
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\obj\Debug\QuickMD5.csproj.CoreCompileInputs.cache
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\obj\Debug\QuickMD5.exe
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\obj\Debug\QuickMD5.pdb
+C:\Users\gavin\source\repos\QuickMD5\QuickMD5\obj\Debug\QuickMD5.csproj.AssemblyReference.cache
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\bin\Debug\QuickMD5.exe.config
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\bin\Debug\QuickMD5.exe
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\bin\Debug\QuickMD5.pdb
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\obj\Debug\QuickMD5.csproj.AssemblyReference.cache
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\obj\Debug\QuickMD5.csproj.CoreCompileInputs.cache
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\obj\Debug\QuickMD5.exe
+C:\Users\gavin\source\repos\QuickMD5 - Copy\QuickMD5\obj\Debug\QuickMD5.pdb
