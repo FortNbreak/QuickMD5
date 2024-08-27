@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -70,6 +70,12 @@ namespace QuickMD5
                 return;
             }
 
+            GoDownLine();
+            int numThreads = GetNumberOfThreads();
+            Console.Clear();
+            PrintLogo();
+
+
             int totalFiles = md5Dict.Count;
             int successfulFiles = 0;
             int corruptedFiles = 0;
@@ -83,7 +89,7 @@ namespace QuickMD5
             // Start a task to process the files in parallel
             Task.Run(() =>
             {
-                Parallel.ForEach(md5Dict, entry =>
+                Parallel.ForEach(md5Dict, new ParallelOptions { MaxDegreeOfParallelism = numThreads }, entry =>
                 {
                     string filePath = entry.Key;
                     string originalMD5 = entry.Value;
@@ -182,6 +188,31 @@ namespace QuickMD5
             GoDownLine();
             CenterText("Check complete.");
             Console.ReadLine();
+        }
+
+        // Prompt the user to input the number of threads to use then return the value the user entered
+        static int GetNumberOfThreads()
+        {
+            int numThreads;
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                CenterText("Enter the number of threads to use: ");
+                Console.ResetColor();
+
+                int leftPadding = (Console.WindowWidth - "Enter the number of threads to use: ".Length) / 2;
+                Console.SetCursorPosition(leftPadding + "Enter the number of threads to use: ".Length, Console.CursorTop - 1);
+
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out numThreads) && numThreads > 0)
+                {
+                    break;
+                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                CenterText("Invalid input. Please enter a positive number.");
+                Console.ResetColor();
+            }
+            return numThreads;
         }
 
         // Reads the MD5 file and returns a dictionary with file paths and their corresponding MD5 hashes
