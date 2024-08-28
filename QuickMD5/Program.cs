@@ -188,9 +188,12 @@ namespace QuickMD5
                 Environment.Exit(1);
             }
             stopwatch.Stop();
+            TimeSpan elapsed = stopwatch.Elapsed;
+            string ElapsedTime = string.Format("{0:D2}:{1:D2}:{2:D2}", elapsed.Hours, elapsed.Minutes, elapsed.Seconds);
+
             Console.ForegroundColor = ConsoleColor.Green;
             GoDownLine();
-            CenterText($"Check complete. {stopwatch.Elapsed}");
+            CenterText($"Check complete. {ElapsedTime}");
             Console.ReadLine();
         }
 
