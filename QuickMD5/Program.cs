@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace QuickMD5
 {
@@ -24,6 +25,9 @@ namespace QuickMD5
             Console.Title = "QuickMD5 - No MD5 File Selected";
             // Print the logo
             PrintLogo();
+
+            // Create the timer to detect how long it took
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             string md5FilePath;
             string md5FileName;
@@ -183,10 +187,10 @@ namespace QuickMD5
                 Console.ReadLine();
                 Environment.Exit(1);
             }
-
+            stopwatch.Stop();
             Console.ForegroundColor = ConsoleColor.Green;
             GoDownLine();
-            CenterText("Check complete.");
+            CenterText($"Check complete. {stopwatch.Elapsed}");
             Console.ReadLine();
         }
 
