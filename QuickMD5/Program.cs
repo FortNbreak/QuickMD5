@@ -193,23 +193,24 @@ namespace QuickMD5
         // Prompt the user to input the number of threads to use then return the value the user entered
         static int GetNumberOfThreads()
         {
+            int maxThreads = Environment.ProcessorCount;
             int numThreads;
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                CenterText("Enter the number of threads to use: ");
+                CenterText($"Enter the number of threads to use (1-{maxThreads}): ");
                 Console.ResetColor();
 
-                int leftPadding = (Console.WindowWidth - "Enter the number of threads to use: ".Length) / 2;
-                Console.SetCursorPosition(leftPadding + "Enter the number of threads to use: ".Length, Console.CursorTop - 1);
+                int leftPadding = (Console.WindowWidth - $"Enter the number of threads to use (1-{maxThreads}): ".Length) / 2;
+                Console.SetCursorPosition(leftPadding + $"Enter the number of threads to use (1-{maxThreads}): ".Length, Console.CursorTop - 1);
 
                 string input = Console.ReadLine();
-                if (int.TryParse(input, out numThreads) && numThreads > 0)
+                if (int.TryParse(input, out numThreads) && numThreads > 0 && numThreads <= maxThreads)
                 {
                     break;
                 }
                 Console.ForegroundColor = ConsoleColor.Red;
-                CenterText("Invalid input. Please enter a positive number.");
+                CenterText($"Invalid input. Please enter a number between 1 and {maxThreads}.");
                 Console.ResetColor();
             }
             return numThreads;
