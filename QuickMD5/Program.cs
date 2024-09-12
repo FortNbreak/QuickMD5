@@ -27,26 +27,23 @@ namespace QuickMD5
             PrintLogo();
 
             // Create the timer to detect how long it took
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            List<string> md5FilePaths = new List<string>();
 
-            string md5FilePath;
-            string md5FileName;
-
-            // Check if an MD5 file path is provided as an argument
-            if (args.Length != 1)
+            // Check if MD5 file paths are provided as arguments
+            if (args.Length == 0)
             {
-                // Open a file dialog to select an MD5 file
+                // Open a file dialog to select MD5 files
                 OpenFileDialog openFileDialog = new OpenFileDialog
                 {
                     Filter = "MD5 files (*.md5)|*.md5|All files (*.*)|*.*",
-                    Title = "Select an MD5 file"
+                    Title = "Select MD5 files",
+                    Multiselect = true
                 };
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    md5FilePath = openFileDialog.FileName;
-                    md5FileName = Path.GetFileName(md5FilePath);
-                    Console.Title = $"QuickMD5 - Checking {md5FileName}";
+                    md5FilePaths.AddRange(openFileDialog.FileNames);
+                    Console.Title = $"QuickMD5 - Checking {md5FilePaths.Count} files";
                 }
                 else
                 {
@@ -59,17 +56,25 @@ namespace QuickMD5
             }
             else
             {
-                // If a file path is provided as an argument, use it
-                md5FilePath = args[0];
-                md5FileName = Path.GetFileName(md5FilePath);
-                Console.Title = $"QuickMD5 - Checking {md5FileName}";
+                // If file paths are provided as arguments, use them
+                md5FilePaths.AddRange(args);
+                Console.Title = $"QuickMD5 - Checking {md5FilePaths.Count} files";
             }
 
-            // Read the MD5 file and store the entries in a dictionary
-            var md5Dict = ReadMD5File(md5FilePath);
+            // Read the MD5 files and store the entries in a dictionary
+            var md5Dict = new ConcurrentDictionary<string, string>();
+            foreach (var md5FilePath in md5FilePaths)
+            {
+                var entries = ReadMD5File(md5FilePath);
+                foreach (var entry in entries)
+                {
+                    md5Dict[entry.Key] = entry.Value;
+                }
+            }
+
             if (md5Dict.Count == 0)
             {
-                CenterText("No valid entries found in the MD5 file. Exiting.");
+                CenterText("No valid entries found in the MD5 files. Exiting.");
                 Console.ReadLine();
                 return;
             }
@@ -78,7 +83,6 @@ namespace QuickMD5
             int numThreads = GetNumberOfThreads();
             Console.Clear();
             PrintLogo();
-
 
             int totalFiles = md5Dict.Count;
             int successfulFiles = 0;
@@ -89,6 +93,8 @@ namespace QuickMD5
             // Concurrent collections to store missing and corrupted files
             ConcurrentBag<string> missingFileList = new ConcurrentBag<string>();
             ConcurrentBag<string> corruptedFileList = new ConcurrentBag<string>();
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             // Start a task to process the files in parallel
             Task.Run(() =>
@@ -229,6 +235,12 @@ namespace QuickMD5
             var md5Dict = new Dictionary<string, string>();
             foreach (var line in File.ReadLines(md5FilePath))
             {
+                // Ignore comments
+                if (line.StartsWith(";"))
+                {
+                    continue;
+                }
+
                 var parts = line.Split(new[] { " *" }, StringSplitOptions.None);
                 if (parts.Length == 2)
                 {
@@ -279,7 +291,6 @@ namespace QuickMD5
             Console.WriteLine();
         }
 
-        // Prints the logo and description
         static void PrintLogo()
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
