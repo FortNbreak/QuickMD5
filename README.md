@@ -37,6 +37,13 @@ Since you can use arguments and do it through a command line, you can set up .ba
 start path/to/QuickMD5.exe path/to/md5_file.md5
 ```
 
+# Commenting
+To add comments to a .MD5 file, do it this way:
+```
+; Comment goes here
+```
+I am going to add multi-line commenting in the next update. 
+
 # Suggestions
 If you would like to suggest a feature, make an issue like this:
 
